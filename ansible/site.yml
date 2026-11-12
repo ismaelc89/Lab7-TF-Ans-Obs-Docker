@@ -1,0 +1,21 @@
+---
+- name: Deploy Private Application
+  hosts: role_app_server
+  become: true
+  roles:
+    - app_server
+
+- name: Configure Node exporter
+  hosts: aws_ec2
+  become: true
+  roles:
+    - node_exporter
+
+- name: Configure Observability Stack
+  hosts: role_web_proxy
+  become: true
+  roles:
+    - swap
+    - web_proxy
+    - prometheus
+    - grafana
