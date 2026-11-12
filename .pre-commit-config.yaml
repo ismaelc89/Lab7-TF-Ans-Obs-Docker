@@ -1,0 +1,28 @@
+---
+repos:
+  # Basic file housekeeping hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+        files: \.(yaml|yml)$   # Explicitly matches both .yaml and .yml anywhere in the repo
+      - id: check-added-large-files
+
+  # YAML Linting (matching your existing CI linter rules)
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        files: \.(yaml|yml)$   # Explicitly matches both .yaml and .yml
+        args: [--config-data, "{extends: default, rules: {line-length: disable}}"]
+
+  # Terraform Hooks
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.88.0
+    hooks:
+      - id: terraform_fmt      # Automatically formats your .tf files (like terraform fmt)
+        files: ^terraform/.*\.tf$     # <--- Targets only files inside ./terraform/
+      - id: terraform_tflint             # Catches possible errors, deprecated syntax, and best practice violations
+        files: ^terraform/.*\.tf$    # <--- Targets only files inside ./terraform/
