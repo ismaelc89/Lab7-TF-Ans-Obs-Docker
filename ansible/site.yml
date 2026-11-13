@@ -17,5 +17,6 @@
   roles:
     - swap
     - web_proxy
+    - docker_app
     - prometheus
     - grafana

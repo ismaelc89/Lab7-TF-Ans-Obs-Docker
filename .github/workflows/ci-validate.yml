@@ -2,7 +2,7 @@
 
 name: CI - Validate Terraform & Ansible
 
-on:
+'on':
   pull_request:
     branches: ["main"]
 
@@ -12,7 +12,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: production
+    environment:
+      name: production
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -20,7 +21,7 @@ jobs:
         shell: bash
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
+      # Checkout the repository to the GitHub Actions runner
       - name: Checkout
         uses: actions/checkout@v4
 
