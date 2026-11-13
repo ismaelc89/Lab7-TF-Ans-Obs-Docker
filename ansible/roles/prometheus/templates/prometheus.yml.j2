@@ -9,3 +9,11 @@ scrape_configs:
 {% for host in groups['role_app_server'] %}
           - '{{ hostvars[host].ansible_host }}:9100'  # Dynamically adds all app servers
 {% endfor %}
+
+  - job_name: 'docker-containers'
+    static_configs:
+      - targets:
+        - 'localhost:8081'
+
+rule_files:
+  - /etc/prometheus/alert_rules.yml

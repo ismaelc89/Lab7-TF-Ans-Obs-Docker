@@ -16,6 +16,14 @@ resource "aws_vpc_security_group_ingress_rule" "allow_http" {
   to_port           = 80
 }
 
+resource "aws_vpc_security_group_ingress_rule" "allow_docker" {
+  security_group_id = aws_security_group.public_ec2_sg.id
+  ip_protocol       = "tcp"
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 5000
+  to_port           = 5000
+}
+
 resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
   security_group_id = aws_security_group.public_ec2_sg.id
   ip_protocol       = "tcp"
